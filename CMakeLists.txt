@@ -29,7 +29,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         wavfile.h
         wavfile.cpp
         steganography.h steganography.cpp
-        audioplayer.h audioplayer.cpp
+        resources.qrc
+        app_resource.rc
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET WAV-steganography APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

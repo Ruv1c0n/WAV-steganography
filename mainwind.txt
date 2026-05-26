@@ -73,7 +73,7 @@ QLabel {
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>16777215</height>
+        <height>100</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -162,7 +162,7 @@ QLineEdit{
        <item>
         <layout class="QHBoxLayout" name="info">
          <property name="rightMargin">
-          <number>10</number>
+          <number>160</number>
          </property>
          <item>
           <widget class="QLabel" name="durationLabel">
@@ -180,7 +180,7 @@ QLineEdit{
             <string notr="true">QObject { color: #A0A0A0 }</string>
            </property>
            <property name="text">
-            <string>Частота: -</string>
+            <string>Частота: 44100 Гц</string>
            </property>
           </widget>
          </item>
@@ -190,7 +190,7 @@ QLineEdit{
             <string notr="true">QObject { color: #A0A0A0 }</string>
            </property>
            <property name="text">
-            <string>Разрядность: -</string>
+            <string>Канал: 16 бит</string>
            </property>
           </widget>
          </item>
@@ -200,7 +200,7 @@ QLineEdit{
             <string notr="true">QObject { color: #A0A0A0 }</string>
            </property>
            <property name="text">
-            <string>Каналы: -</string>
+            <string>Формат: моно</string>
            </property>
           </widget>
          </item>
@@ -210,7 +210,7 @@ QLineEdit{
             <string notr="true">QObject { color: #27AE60 }</string>
            </property>
            <property name="text">
-            <string/>
+            <string>✓ Формат поддерживается</string>
            </property>
           </widget>
          </item>
@@ -289,19 +289,10 @@ QPlainTextEdit{
            <property name="orientation">
             <enum>Qt::Orientation::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
           </spacer>
          </item>
          <item>
           <widget class="QLabel" name="encodeStatusLabel">
-           <property name="visible">
-            <bool>false</bool>
-           </property>
            <property name="styleSheet">
             <string notr="true">QFrame{
     border: 1px solid #2E7D32;
@@ -317,7 +308,7 @@ QPlainTextEdit{
             <enum>QFrame::Shadow::Plain</enum>
            </property>
            <property name="text">
-            <string/>
+            <string>✓ Сообщение спрятано</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -392,7 +383,7 @@ QPlainTextEdit{
            </property>
            <property name="minimumSize">
             <size>
-             <width>138</width>
+             <width>40</width>
              <height>0</height>
             </size>
            </property>
@@ -444,12 +435,6 @@ QPushButton:hover {
           <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Orientation::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
            </property>
           </spacer>
          </item>
@@ -521,28 +506,22 @@ QGroupBox::title {
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="sliderOriginal">
+           <widget class="QProgressBar" name="progressBarOriginal">
             <property name="styleSheet">
-             <string notr="true">QSlider::groove:horizontal {
+             <string notr="true">QProgressBar{
     border: 1px solid #404040;
-    height: 8px;
-    background: #1E1E1E;
-    border-radius: 4px;
+    border-radius: 5px;
+    background-color: #1E1E1E;
 }
-QSlider::handle:horizontal {
-    background: #007ACC;
-    border: 1px solid #007ACC;
-    width: 14px;
-    margin: -4px 0;
-    border-radius: 7px;
-}
-QSlider::sub-page:horizontal {
-    background: #007ACC;
-    border-radius: 4px;
+QProgressBar::chunk{
+    background-color: #007ACC;
 }</string>
             </property>
-            <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
+            <property name="value">
+             <number>0</number>
+            </property>
+            <property name="textVisible">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -591,28 +570,22 @@ QSlider::sub-page:horizontal {
            </widget>
           </item>
           <item>
-           <widget class="QSlider" name="sliderEncoded">
+           <widget class="QProgressBar" name="progressBarEncoded">
             <property name="styleSheet">
-             <string notr="true">QSlider::groove:horizontal {
+             <string notr="true">QProgressBar{
     border: 1px solid #404040;
-    height: 8px;
-    background: #1E1E1E;
-    border-radius: 4px;
+    border-radius: 5px;
+    background-color: #1E1E1E;
 }
-QSlider::handle:horizontal {
-    background: #007ACC;
-    border: 1px solid #007ACC;
-    width: 14px;
-    margin: -4px 0;
-    border-radius: 7px;
-}
-QSlider::sub-page:horizontal {
-    background: #007ACC;
-    border-radius: 4px;
+QProgressBar::chunk{
+    background-color: #007ACC;
 }</string>
             </property>
-            <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
+            <property name="value">
+             <number>0</number>
+            </property>
+            <property name="textVisible">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -647,7 +620,6 @@ QSlider::sub-page:horizontal {
     <property name="title">
      <string>Помощь</string>
     </property>
-    <addaction name="helpAction"/>
    </widget>
    <addaction name="File"/>
    <addaction name="Help"/>
@@ -666,11 +638,6 @@ QSlider::sub-page:horizontal {
   <action name="Quit">
    <property name="text">
     <string>Выход</string>
-   </property>
-  </action>
-  <action name="helpAction">
-   <property name="text">
-    <string>Инструкция</string>
    </property>
   </action>
  </widget>

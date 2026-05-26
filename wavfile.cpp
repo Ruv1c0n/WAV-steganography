@@ -9,11 +9,15 @@ bool WavFile::load(const QString &path)
     if (!file.open(QIODevice::ReadOnly))
         return false;
 
+    // Стандартный заголовок WAV занимает 44 байта.
+    // Сохраняем его, чтобы при сохранении не пересчитывать метаданные.
     header = file.read(44);
 
     if (header.size() != 44)
         return false;
 
+    // Извлекаем параметры аудио из заголовка с помощью reinterpret_cast.
+    // Смещения 22, 24 и 34 строго определены стандартом WAV.
     channels =
         *reinterpret_cast<int16_t*>(
             header.data() + 22);
@@ -51,6 +55,8 @@ bool WavFile::save(const QString &path)
     if (!file.open(QIODevice::WriteOnly))
         return false;
 
+    // Сохраняем оригинальный заголовок и измененный массив сэмплов.
+    // Количество сэмплов не меняется, поэтому размеры в заголовке остаются корректными.
     file.write(header);
 
     file.write(
