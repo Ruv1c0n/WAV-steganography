@@ -1,74 +1,48 @@
-# WAV Steganography  
-Status: In Development  
-C++ / Qt6 / CMake  
-License: -  
+🎵 WAV Steganography (Qt6)
+Desktop application for hiding secret text messages inside WAV audio files using the LSB (Least Significant Bit) method. The changes are completely inaudible to the human ear.
 
-## Содержание  
-- [Описание](#описание)
-- [Технологии](#технологии)
-- [Требования](#требования)
-- [Установка](#установка)
-- [Использование](#использование)
-- [Структура проекта](#структура)
-- [Результаты](#результаты)
-- [API документация](#api)
-- [Тестирование](#тестирование)
-- [Известные проблемы](#проблемы)
-- [Авторы](#авторы)
-- [Лицензия](#лицензия)
+C++QtPlatform
 
-## Описание
-<a name="описание"/>  
+📸 Screenshots
+<img width="817" height="719" alt="image" src="https://github.com/user-attachments/assets/15e30507-412c-4891-919e-45ad8fab401e" />
 
-### Цель проекта  
-Реализация системы цифровой стеганографии для встраивания скрытых данных в звуковые файлы формата WAV и их последующего извлечения без заметного ухудшения качества звука.
+🧩 Features
+- LSB Encoding: Hides text in the least significant bits of audio samples.
+- UTF-8 Support: Can hide messages in any language (Russian, English, etc.).
+- Built-in Audio Player: Listen to both original and encoded audio directly in the app with play/pause and seeking.
+- Format Validation: Automatically checks if the loaded WAV meets the requirements.
+- Dark Theme: Modern and sleek dark UI.
 
-[//]: # (### Основные задачи  )
-[//]: # (- Реализовать несколько методов встраивания данных в WAV-файлы  )
-[//]: # (- Обеспечить высокую скрытность встраивания  )
-[//]: # (- Сохранить качество аудиосигнала  )
-[//]: # (- Реализовать надежное извлечение встроенных данных  )
-[//]: # (- Обеспечить криптографическую защиту данных  )
+⚠️ Requirements for WAV files
+To ensure lossless steganography, the input audio file MUST strictly match these parameters:
 
-[//]: # (### Ключевые возможности  )
-[//]: # (**Встраивание данных:** Скрытое встраивание бинарных данных в звуковые файлы  )
+- Format: PCM (Uncompressed)
+- Sample Rate: 44100 Hz
+- Channels: 1 (Mono)
+- Bits Per Sample: 16 bit
 
-[//]: # (**Извлечение данных:** Восстановление встроенной информации из стегоконтейнера  )
+🚀 How to use
+Hiding a message:
+1. Click "Загрузить WAV" and select your audio file.
+2. Ensure the status shows "✓ Формат поддерживается".
+3. Type your secret message in the text box.
+4. Click "Спрятать".
+5. Click "Сохранить WAV" to save the modified audio file.
 
-[//]: # (**Различные методы:** Поддержка LSB \(Least Significant Bit\) и других алгоритмов  )
+Extracting a message:
+1. Load the audio file containing the steganogram.
+2. Click "Извлечь сообщение".
+3. The hidden text will appear in the bottom box. Use the copy button to copy it.
 
-[//]: # (**Криптография:** Опциональное шифрование встраиваемых данных  )
+🛠️ Building from source (Windows / MSYS2)
+1. Install MSYS2 and required packages:
+pacman -S mingw-w64-x86_64-qt6-base mingw-w64-x86_64-qt6-multimedia mingw-w64-x86_64-cmake mingw-w64-x86_64-gcc
+2. Open MINGW64 terminal and navigate to the project folder.
+3. Build the project:
+   mkdir build && cd build
+   cmake ../ -G "MinGW Makefiles"
+   mingw32-make
 
-[//]: # (**Анализ:** Инструменты для анализа качества и обнаружения стеганографии  )
-
-[//]: # (**CLI интерфейс:** Удобный командный интерфейс для работы  )
-
-[//]: # (## Технологии)
-[//]: # (<a name="технологии"/>  )
-
-[//]: # (## Требования)
-[//]: # (<a name="требования"/>  )
-
-[//]: # (## Установка)
-[//]: # (<a name="установка"/>  )
-
-[//]: # (## Использование)
-[//]: # (<a name="использование"/>  )
-
-[//]: # (## Структура проекта)
-[//]: # (<a name="структура"/>  )
-
-[//]: # (## Результаты)
-[//]: # (<a name="результаты"/>  )
-
-[//]: # (## API документация)
-[//]: # (<a name="api"/>  )
-
-[//]: # (## Тестирование)
-[//]: # (<a name="тестирование"/>  )
-
-[//]: # (## Известные проблемы)
-[//]: # (<a name="проблемы"/>  )
-
-[//]: # (## Ограничения)
-[//]: # (<a name="ограничения"/>)  
+4. Deploy dependencies:
+   windeployqt WAV-steganography.exe
+(Don't forget to manually copy multimedia plugin and FFmpeg DLLs as described in the project wiki/issues).
