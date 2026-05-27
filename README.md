@@ -36,16 +36,26 @@ Extracting a message:
 
 🛠️ Building from source (Windows / MSYS2)
 1. Install MSYS2 and required packages:
-   
-pacman -S mingw-w64-x86_64-qt6-base mingw-w64-x86_64-qt6-multimedia mingw-w64-x86_64-cmake mingw-w64-x86_64-gcc
+2. 
+ ```  
+ pacman -S mingw-w64-x86_64-qt6-base mingw-w64-x86_64-qt6-multimedia mingw-w64-x86_64-cmake mingw-w64-x86_64-gcc
+ ```
 
 4. Open MINGW64 terminal and navigate to the project folder.
 5. Build the project:
-   
-   mkdir build && cd build
-   cmake ../ -G "MinGW Makefiles"
-   mingw32-make
 
+   ``` 
+   mkdir build && cd build
+   
+   cmake ../ -G "MinGW Makefiles"
+   
+   mingw32-make
+   ```
+   
 7. Deploy dependencies:
+   
+   ```
    windeployqt WAV-steganography.exe
+   ```
+   
 (Don't forget to manually copy multimedia plugin and FFmpeg DLLs as described in the project wiki/issues).
