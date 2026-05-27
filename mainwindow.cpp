@@ -57,6 +57,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(originalPlayer, &QMediaPlayer::positionChanged, this, &MainWindow::updateOriginalProgress);
     connect(originalPlayer, &QMediaPlayer::durationChanged, this, &MainWindow::onOriginalDurationChanged);
 
+    connect(originalPlayer, &QMediaPlayer::errorOccurred, this, [](QMediaPlayer::Error error, const QString &errorString){
+        qDebug() << "MEDIA ERROR:";
+        qDebug() << error;
+        qDebug() << errorString;
+    });
+
     connect(encodedPlayer, &QMediaPlayer::positionChanged, this, &MainWindow::updateEncodedProgress);
     connect(encodedPlayer, &QMediaPlayer::durationChanged, this, &MainWindow::onEncodedDurationChanged);
 
@@ -79,6 +85,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Помощь
     connect(ui->helpAction, &QAction::triggered, this, &MainWindow::onHelpClicked);
+
+    // Обработка ошибок плеера - покажет точную причину в статусбаре!
+    connect(originalPlayer, &QMediaPlayer::errorOccurred, this, [this](QMediaPlayer::Error error, const QString &errorString) {
+        Q_UNUSED(error);
+        ui->statusBar->showMessage("Ошибка плеера: " + errorString, 10000);
+    });
+
+    connect(encodedPlayer, &QMediaPlayer::errorOccurred, this, [this](QMediaPlayer::Error error, const QString &errorString) {
+        Q_UNUSED(error);
+        ui->statusBar->showMessage("Ошибка плеера: " + errorString, 10000);
+    });
 }
 
 MainWindow::~MainWindow()
